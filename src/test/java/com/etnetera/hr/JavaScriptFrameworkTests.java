@@ -41,6 +41,8 @@ public class JavaScriptFrameworkTests {
     @Autowired
     private JavaScriptFrameworkRepository JFRepository;
 
+    public static boolean isSetup = false;
+
     @Test
     public void error4xxTest() throws Exception {
         this.mvc.perform(get("/err400")).andExpect(status().is4xxClientError());
@@ -117,16 +119,20 @@ public class JavaScriptFrameworkTests {
 
     }
 
-    // run before everyr test
+    // fill with dummy data before tests
     @Before
     public void setup(){
-        List<JavaScriptFramework> jsfs = new ArrayList<>();
-        jsfs.add(new JavaScriptFramework(1L,"Angular",new String[]{"2.3.1", "2.4.1"}, new Date(), 1000));
-        jsfs.add(new JavaScriptFramework(2L,"Angular",new String[]{"7.3.1"}, new Date(), 2000));
-        jsfs.add(new JavaScriptFramework(3L,"React",new String[]{"3.3.3"}, new Date(), 3000));
-        jsfs.add(new JavaScriptFramework(4L,"VueJS",new String[]{"0.7.1"}, new Date(), 4000));
-        jsfs.add(new JavaScriptFramework(5L,"AngularJS",new String[]{"1.1.1"}, new Date(), 5000));
-        JFRepository.saveAll(jsfs);
+        if(!isSetup) {
+            List<JavaScriptFramework> jsfs = new ArrayList<>();
+            jsfs.add(new JavaScriptFramework(1L, "Angular", new String[]{"2.3.1", "2.4.1"}, new Date(), 1000));
+            jsfs.add(new JavaScriptFramework(2L, "Angular", new String[]{"7.3.1"}, new Date(), 2000));
+            jsfs.add(new JavaScriptFramework(3L, "React", new String[]{"3.3.3"}, new Date(), 3000));
+            jsfs.add(new JavaScriptFramework(4L, "VueJS", new String[]{"0.7.1"}, new Date(), 4000));
+            jsfs.add(new JavaScriptFramework(5L, "AngularJS", new String[]{"1.1.1"}, new Date(), 5000));
+            JFRepository.saveAll(jsfs);
+
+            isSetup = true;
+        }
     }
 
 
