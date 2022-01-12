@@ -66,8 +66,8 @@ public class JavaScriptFrameworkController {
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
 	}
 
-	@GetMapping("/frameworks/search/{name}")
-	public List<JavaScriptFramework> getJSFrameworksByName(@PathVariable(value = "name") String name){
+	@GetMapping("/frameworks/search")
+	public List<JavaScriptFramework> getJSFrameworksByName(@RequestParam String name){
 		List<JavaScriptFramework> filtered = service.findByName(name);
 
 		return filtered;

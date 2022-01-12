@@ -100,7 +100,7 @@ public class JavaScriptFrameworkTests {
     //Exact match
     public void searchJSFByName() throws Exception {
         mvc.perform( MockMvcRequestBuilders
-                .get("/frameworks/search/angular")
+                .get("/frameworks/search?name=angular")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
